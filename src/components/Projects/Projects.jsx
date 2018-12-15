@@ -10,7 +10,7 @@ class Projects extends Component {
     }
     //dispatch to saga to get tags
     getTags = () => {
-        this.props.dispatch({type: 'FETCH_PROJECTS'});
+        this.props.dispatch({type: 'FETCH_TAGS'});
     }
 
     componentDidMount() {
