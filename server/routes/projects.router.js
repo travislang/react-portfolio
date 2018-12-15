@@ -5,7 +5,10 @@ const pool = require('../modules/pool');
 
 
 router.get('/', ( req, res ) => {
-    pool.query('SELECT * FROM "projects";')
+    let sqlText = `SELECT "projects".id, "projects".name, "projects".description, "projects".thumbnail, "projects".date_completed, "projects".github, "projects".website, "projects".tag_id, "tags".tag_name from "projects"
+    LEFT OUTER JOIN "tags" ON "projects".tag_id = "tags".id;`;
+
+    pool.query(sqlText)
     .then( result => {
         res.send( result.rows );
     }).catch( err => {

@@ -9,12 +9,15 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+import Grid from '@material-ui/core/Grid';
+import TagChip from '../TagChip/TagChip';
+
 const styles = {
     card: {
         maxWidth: 400,
     },
     media: {
-        height: 200,
+        height: 175,
     },
 };
 
@@ -46,9 +49,12 @@ class ProjectItem extends Component {
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button size="small" color="primary">
-                        Learn More
-                    </Button>
+                    <Grid container justify='space-between'>
+                        <Button size="small" color="primary">
+                            Learn More
+                        </Button>
+                        {this.props.project.tag_name ? <TagChip name={this.props.project.tag_name} /> : <div></div>}
+                    </Grid>
                 </CardActions>
             </Card>
         )

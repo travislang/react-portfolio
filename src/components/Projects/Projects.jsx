@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import ProjectItem from './ProjectItem';
 //allows dispatching to redux
 import { connect } from 'react-redux';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+    },
+});
 
 class Projects extends Component {
     //dispatch to saga to get projects
@@ -19,13 +27,21 @@ class Projects extends Component {
     }
 
     render() {
-
+        const classes = this.props;
         const projects = this.props.reduxStore.projects.map( item => {
-            return <ProjectItem key={item.id} project={item} />
+            return (<Grid item lg={4}>
+                        <ProjectItem key={item.id} project={item} />
+                    </Grid>)
         })
         return (
-            <div>
-                {projects}
+            <div className={classes.root}>
+                <Grid 
+                container
+                direction='row'
+                spacing={40}
+                justify='center'>
+                    {projects}
+                </Grid>
             </div>
         )
     }
@@ -35,4 +51,4 @@ const mapReduxStateToProps = (reduxStore) => ({
     reduxStore
 })
 
-export default connect(mapReduxStateToProps)(Projects);
+export default connect(mapReduxStateToProps)(withStyles(styles)(Projects));
