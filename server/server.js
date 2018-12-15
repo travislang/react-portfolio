@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(express.static('build'));
 
 /** ---------- ROUTES ---------- **/
-app.use('/projects', )
+app.use('/projects', projectsRouter);
 
 /** ---------- START SERVER ---------- **/
 app.listen(port, function () {

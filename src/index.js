@@ -4,6 +4,7 @@ import './index.css';
 import App from './components/App/App.js';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import axios from 'axios';
 // Provider is needed to use redux
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';

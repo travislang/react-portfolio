@@ -21,7 +21,7 @@ class Projects extends Component {
     render() {
 
         const projects = this.props.reduxStore.projects.map( item => {
-            <ProjectItem key={item.id} project={item} />
+            return <ProjectItem key={item.id} project={item} />
         })
         return (
             <div>
