@@ -30,8 +30,11 @@ class Projects extends Component {
     render() {
         const classes = this.props;
         const projects = this.props.reduxStore.projects.map( item => {
-            return (<Grid item lg={4}>
-                        <ProjectItem key={item.id} project={item} />
+            return (<Grid item justify='center' lg={5}>
+                        <Grid container justify='center'>
+                            <ProjectItem key={item.id} project={item} />
+                        </Grid>
+                        
                     </Grid>)
         })
         return (
@@ -41,10 +44,15 @@ class Projects extends Component {
                 </Typography>
                 <Grid 
                 container
-                direction='row'
-                spacing={40}
                 justify='center'>
-                    {projects}
+                    <Grid
+                        container
+                        direction='row'
+                        justify='center'
+                        xs={10}
+                        spacing={40}>
+                        {projects}
+                    </Grid>
                 </Grid>
             </div>
         )

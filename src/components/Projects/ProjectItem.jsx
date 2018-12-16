@@ -17,7 +17,7 @@ const styles = {
         maxWidth: 400,
     },
     media: {
-        height: 175,
+        height: 300,
     },
 };
 
