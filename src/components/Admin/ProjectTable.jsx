@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -33,6 +34,7 @@ class ProjectTable extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         return (
             <Paper className={classes.root}>
                 <Table className={classes.table}>
@@ -43,14 +45,16 @@ class ProjectTable extends Component {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {this.props.reduxStore.projects.map(item => {
+                        {this.props.reduxStore.projects.map(row => {
                             return (
                                 <TableRow key={row.id}>
                                     <TableCell component="th" scope="row">
                                         {row.name}
                                     </TableCell>
                                     <TableCell>
-                                        <Button variant="outlined" className={classes.button}
+                                        <Button variant="outlined" 
+                                        color='secondary'
+                                        className={classes.button}
                                         onClick={() => this.handleDelete(row.id)}
                                         >
                                             Delete

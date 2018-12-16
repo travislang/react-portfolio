@@ -17,10 +17,15 @@ function* fetchProjects() {
     const projects = yield call(axios.get, '/projects')
     yield put({type: 'SET_PROJECTS', payload: projects.data})
 }
-
+//saga to async get tags from db
 function* fetchTags() {
     const tags = yield call(axios.get, '/tags')
     yield put({type: 'SET_TAGS', payload: tags.data})
+}
+//saga for deleting projects from admin page
+function* deleteProject(action) {
+    yield call(axios.delete, `/projects${action.payload}`)
+    yield put({type: 'FETCH_PROJECTS'})
 }
 
 
@@ -28,6 +33,7 @@ function* fetchTags() {
 function* rootSaga() {
     yield takeEvery('FETCH_PROJECTS', fetchProjects);
     yield takeEvery('FETCH_TAGS', fetchTags);
+    yield takeEvery('DELETE_PROJECT', deleteProject);
 }
 
 

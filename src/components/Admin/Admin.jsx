@@ -6,26 +6,23 @@ import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import ProjectTable from 
+import ProjectTable from './ProjectTable';
 
 const styles = theme => ({
     container: {
-        maxWidth: 500,
+        maxWidth: 550,
         display: 'flex',
         flexWrap: 'wrap',
     },
     textField: {
-        // marginLeft: theme.spacing.unit,
-        // marginRight: theme.spacing.unit,
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
         width: 250,
     },
     menu: {
         width: 200,
     },
 });
-
-
-
 
 class Admin extends Component {
     state = {
@@ -36,12 +33,17 @@ class Admin extends Component {
         description: '',
         tag: ''
     };
-
+    //send action to saga to get projects from db
+    getProjects = () => {
+        this.props.dispatch({ type: 'FETCH_PROJECTS' });
+    }
+    //send action to saga to get tags from db
     getTags = () => {
         this.props.dispatch({ type: 'FETCH_TAGS' });
     }
 
     componentDidMount() {
+        this.getProjects();
         this.getTags();
     }
 
@@ -127,6 +129,9 @@ class Admin extends Component {
                                 variant="outlined"
                             />
                         </form>
+                    </Grid>
+                    <Grid item>
+                        <ProjectTable />
                     </Grid>
                 </Grid>
                 
