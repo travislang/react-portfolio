@@ -13,34 +13,48 @@ import Button from '@material-ui/core/Button';
 import LaptopMac from '@material-ui/icons/LaptopMac';
 import Build from '@material-ui/icons/Build';
 
-function TabContainer(props) {
-    return (
-        <Typography component="div" style={{ padding: 8 * 3 }}>
-            {props.children}
-        </Typography>
-    );
-}
-
-const styles = {
+const styles = theme => ({
     root: {
         flexGrow: 1,
     },
     grow: {
         flexGrow: 1,
+        fontWeight: 500,
     },
-    menuButton: {
-        marginLeft: -12,
-        marginRight: 20,
+    colorPrimary: {
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        borderTop: `2px solid ${theme.palette.primary.main}`
     },
-};
+    logo: {
+        fontWeight: 300,
+        color: theme.palette.primary.dark,
+    },
+});
+
 class Header extends Component {
+    //sets a local state to keep track of the view
     state = {
         value: 0,
     };
 
+    //this is setting our local state page ref to match the current page on reload
+    componentDidMount() {
+        if (this.props.history.location.pathname === '/') {
+            this.setState({
+                value: 0
+            })
+        }
+        else if (this.props.history.location.pathname === '/admin') {
+            this.setState({
+                value: 1
+            })
+        }
+    }
+
     handleChange = (event, value) => {
         this.setState({ value });
     };
+    
     
     render() {
         const { classes } = this.props;
@@ -48,19 +62,19 @@ class Header extends Component {
 
         return (
             <div className={classes.root}>
-                <AppBar position="static">
+                <AppBar position="fixed" className={classes.colorPrimary}>
                     <Toolbar>
                         <Typography 
                         variant="h5"
                         align='left' 
-                        color="inherit" 
+                        color="textSecondary" 
                         className={classes.grow}>
-                            Travis Lang
+                            Travis<span className={classes.logo}>Lang</span>
                         </Typography>
-                        <Tabs value={value} 
+                        <Tabs value={value}
                             onChange={this.handleChange}
-                            indicatorColor="secondary"
-                            textColor="secondary">
+                            indicatorColor='primary'
+                            textColor="primary">
                             <Tab 
                             icon={<LaptopMac />}
                             label="Projects"
@@ -73,7 +87,6 @@ class Header extends Component {
                             component={Link}
                             to='/admin' />
                         </Tabs>
-                        {/* <Button color="inherit"><Link to='/'>Projects</Link></Button> */}
                     </Toolbar>
                 </AppBar>
             </div>

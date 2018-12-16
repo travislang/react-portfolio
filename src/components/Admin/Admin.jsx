@@ -153,13 +153,15 @@ class Admin extends Component {
                                 value={this.state.description}
                                 onChange={this.handleChange('description')}
                                 margin="normal"
-                                fullWidth='true'
+                                fullWidth
                                 style={{ margin: 8 }}
                                 variant="outlined"
                             />
-                            <Button type='submit' variant="outlined" color='primary' className={classes.button}>
-                                Submit
-                            </Button>
+                            <Grid container justify='flex-end'>
+                                <Button type='submit' variant="outlined" color='primary' className={classes.button}>
+                                    Submit
+                                </Button>
+                            </Grid>
                         </form>
                     </Grid>
                     <Grid item>

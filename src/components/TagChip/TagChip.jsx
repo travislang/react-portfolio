@@ -9,6 +9,7 @@ class TagChip extends Component {
                 icon={<Check />}
                 label={this.props.name}
                 color="secondary"
+                variant='outlined'
             />
         )
     }

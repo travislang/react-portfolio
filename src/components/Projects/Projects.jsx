@@ -36,7 +36,7 @@ class Projects extends Component {
         })
         return (
             <div className={classes.root}>
-                <Typography variant="h3" gutterBottom align='center' color='textSecondary'>
+                <Typography variant="h2" gutterBottom align='center' color='textSecondary'>
                     Projects
                 </Typography>
                 <Grid 

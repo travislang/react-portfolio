@@ -74,11 +74,22 @@ const tags = (state = [], action) => {
     }
 }
 
+  //sets a state to keep track of the page view
+const page = (state = 0, action ) => {
+    switch (action.type) {
+        case 'CHANGE_PAGE':
+            return !state;
+        default:
+            return state;
+    }
+}
+
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         projects,
         tags,
+        page
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
