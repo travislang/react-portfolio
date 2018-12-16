@@ -36,7 +36,7 @@ class ProjectItem extends Component {
                 <CardActionArea>
                     <CardMedia
                         className={classes.media}
-                        image={this.props.project.thumbnail}
+                        image={this.props.project.thumbnail || '/images/browser-mockup.png'}
                         title="app showcase"
                     />
                     <CardContent>
@@ -44,13 +44,13 @@ class ProjectItem extends Component {
                             {this.props.project.name}
                         </Typography>
                         <Typography component="p">
-                            {this.props.project.description}
+                            {this.props.project.description || 'no description available'}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
                     <Grid container justify='space-between'>
-                        <Button target="_blank" href={this.props.project.github} size="small" color="primary">
+                        <Button target="_blank" href={this.props.project.github || 'https://github.com/' } size="small" color="primary">
                             Learn More
                         </Button>
                         {this.props.project.tag_name ? <TagChip name={this.props.project.tag_name} /> : <div></div>}

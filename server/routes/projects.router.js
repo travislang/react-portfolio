@@ -6,7 +6,8 @@ const pool = require('../modules/pool');
 // get route to retrieve projects from db
 router.get('/', ( req, res ) => {
     let sqlText = `SELECT "projects".id, "projects".name, "projects".description, "projects".thumbnail, "projects".date_completed, "projects".github, "projects".website, "projects".tag_id, "tags".tag_name from "projects"
-    LEFT OUTER JOIN "tags" ON "projects".tag_id = "tags".id;`;
+    LEFT OUTER JOIN "tags" ON "projects".tag_id = "tags".id
+    ORDER BY "projects"."id" ASC;`;
     pool.query(sqlText)
     .then( result => {
         res.send( result.rows );
@@ -21,7 +22,7 @@ router.post('/', ( req, res ) => {
 
     let sqlText = `INSERT INTO "projects" ("name", "description", "website", "github", "date_completed", "tag_id")
     VALUES($1, $2, $3, $4, $5, $6);`
-    pool.query(sqlText, [project.name, project.description, project.website, project.github, project.date, project.tag_id])
+    pool.query(sqlText, [project.name, project.description, project.website, project.github, project.date, project.tag])
     .then( result => {
         res.sendStatus(201);
     }).catch( err => {

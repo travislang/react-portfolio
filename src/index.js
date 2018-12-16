@@ -29,8 +29,15 @@ function* deleteProject(action) {
 }
 
 function* addProject(action) {
-    yield call(axios.post, '/projects', action.payload)
-    yield put({type: 'FETCH_PROJECTS'})
+    try {
+        yield call(axios.post, '/projects', action.payload)
+        alert('Successfully added project!')
+        yield put({ type: 'FETCH_PROJECTS' })
+    } catch (err) {
+        console.log('error in addproject saga:', err)
+        alert('Something went wrong.  Name, date & tag are required. Please Try again.');
+    }
+    
 }
 
 
