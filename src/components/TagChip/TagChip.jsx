@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import Chip from '@material-ui/core/Chip';
-import FaceIcon from '@material-ui/icons/Face';
+import Check from '@material-ui/icons/Check';
 
 class TagChip extends Component {
     render() {
         return (
             <Chip
-                icon={<FaceIcon />}
+                icon={<Check />}
                 label={this.props.name}
-                color="primary"
+                color="secondary"
             />
         )
     }

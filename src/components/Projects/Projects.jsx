@@ -4,6 +4,7 @@ import ProjectItem from './ProjectItem';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
     root: {
@@ -35,6 +36,9 @@ class Projects extends Component {
         })
         return (
             <div className={classes.root}>
+                <Typography variant="h3" gutterBottom align='center' color='textSecondary'>
+                    Projects
+                </Typography>
                 <Grid 
                 container
                 direction='row'

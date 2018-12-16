@@ -50,7 +50,7 @@ class ProjectItem extends Component {
                 </CardActionArea>
                 <CardActions>
                     <Grid container justify='space-between'>
-                        <Button size="small" color="primary">
+                        <Button target="_blank" href={this.props.project.github} size="small" color="primary">
                             Learn More
                         </Button>
                         {this.props.project.tag_name ? <TagChip name={this.props.project.tag_name} /> : <div></div>}
