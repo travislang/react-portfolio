@@ -24,7 +24,12 @@ function* fetchTags() {
 }
 //saga for deleting projects from admin page
 function* deleteProject(action) {
-    yield call(axios.delete, `/projects${action.payload}`)
+    yield call(axios.delete, `/projects/${action.payload}`)
+    yield put({type: 'FETCH_PROJECTS'})
+}
+
+function* addProject(action) {
+    yield call(axios.post, '/projects', action.payload)
     yield put({type: 'FETCH_PROJECTS'})
 }
 
@@ -34,6 +39,7 @@ function* rootSaga() {
     yield takeEvery('FETCH_PROJECTS', fetchProjects);
     yield takeEvery('FETCH_TAGS', fetchTags);
     yield takeEvery('DELETE_PROJECT', deleteProject);
+    yield takeEvery('ADD_PROJECT', addProject);
 }
 
 

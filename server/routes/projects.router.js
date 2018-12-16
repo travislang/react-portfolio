@@ -16,12 +16,22 @@ router.get('/', ( req, res ) => {
     });
 });
 
-// router.post('/', ( req, res ) => {
+router.post('/', ( req, res ) => {
+    const project = req.body;
 
-// })
+    let sqlText = `INSERT INTO "projects" ("name", "description", "website", "github", "date_completed", "tag_id")
+    VALUES($1, $2, $3, $4, $5, $6);`
+    pool.query(sqlText, [project.name, project.description, project.website, project.github, project.date, project.tag_id])
+    .then( result => {
+        res.sendStatus(201);
+    }).catch( err => {
+        console.log('error in project post query:', err);
+        res.sendStatus(500);
+    })
+})
 
 //delete project from db
-router.delete('/id', ( req, res ) => {
+router.delete('/:id', ( req, res ) => {
     let sqlText = `DELETE FROM "projects"
                     WHERE "id" = $1;`
     pool.query(sqlText, [req.params.id])

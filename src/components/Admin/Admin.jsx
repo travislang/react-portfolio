@@ -7,17 +7,23 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import ProjectTable from './ProjectTable';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
     container: {
-        maxWidth: 550,
+        maxWidth: 650,
         display: 'flex',
         flexWrap: 'wrap',
     },
     textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
-        width: 250,
+        width: 200,
+    },
+    longTextField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 300,
     },
     menu: {
         width: 200,
@@ -53,6 +59,19 @@ class Admin extends Component {
         });
     };
 
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.dispatch({type: 'ADD_PROJECT', payload: this.state})
+        this.setState({
+            name: '',
+            date: '',
+            github: '',
+            website: '',
+            description: '',
+            tag: ''
+        });
+    }
+
     render() {
         const { classes } = this.props;
         return (
@@ -62,7 +81,7 @@ class Admin extends Component {
                 </Typography>
                 <Grid container spacing={8} direction='column' alignItems='center'>
                     <Grid item>
-                        <form className={classes.container} noValidate autoComplete="off">
+                        <form onSubmit={this.handleSubmit} className={classes.container} noValidate autoComplete="off">
                             <TextField
                                 id="standard-with-placeholder"
                                 label="Name"
@@ -75,20 +94,10 @@ class Admin extends Component {
                             />
                             <TextField
                                 id="standard-with-placeholder"
-                                label="Github"
-                                placeholder="link to github repo"
-                                value={this.state.github}
-                                onChange={this.handleChange('github')}
-                                className={classes.textField}
-                                margin="normal"
-                                variant="outlined"
-                            />
-                            <TextField
-                                id="standard-with-placeholder"
-                                label="website URL"
-                                value={this.state.website}
-                                placeholder="Link to website (optional)"
-                                onChange={this.handleChange('website')}
+                                label="Date"
+                                placeholder="ex. 01/05/2018"
+                                value={this.state.date}
+                                onChange={this.handleChange('date')}
                                 className={classes.textField}
                                 margin="normal"
                                 variant="outlined"
@@ -110,11 +119,31 @@ class Admin extends Component {
                                 variant="outlined"
                             >
                                 {this.props.reduxStore.tags.map(option => (
-                                    <MenuItem key={option.id} value={option.tag_name}>
+                                    <MenuItem key={option.id} value={option.id}>
                                         {option.tag_name}
                                     </MenuItem>
                                 ))}
                             </TextField>
+                            <TextField
+                                id="standard-with-placeholder"
+                                label="Github"
+                                placeholder="link to github repo"
+                                value={this.state.github}
+                                onChange={this.handleChange('github')}
+                                className={classes.longTextField}
+                                margin="normal"
+                                variant="outlined"
+                            />
+                            <TextField
+                                id="standard-with-placeholder"
+                                label="website URL"
+                                value={this.state.website}
+                                placeholder="Link to website (optional)"
+                                onChange={this.handleChange('website')}
+                                className={classes.longTextField}
+                                margin="normal"
+                                variant="outlined"
+                            />
                             <TextField
                                 id="standard-multiline-flexible"
                                 label="description"
@@ -128,6 +157,9 @@ class Admin extends Component {
                                 style={{ margin: 8 }}
                                 variant="outlined"
                             />
+                            <Button type='submit' variant="outlined" color='primary' className={classes.button}>
+                                Submit
+                            </Button>
                         </form>
                     </Grid>
                     <Grid item>
