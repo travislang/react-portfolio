@@ -12,6 +12,8 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, call, put } from 'redux-saga/effects';
 
+
+
 //generator function to fetch projects drom db
 function* fetchProjects() {
     const projects = yield call(axios.get, '/projects')
@@ -31,11 +33,11 @@ function* deleteProject(action) {
 function* addProject(action) {
     try {
         yield call(axios.post, '/projects', action.payload)
-        alert('Successfully added project!')
         yield put({ type: 'FETCH_PROJECTS' })
+        yield put({type: 'NOTIFICATION_SUCCESS'})
     } catch (err) {
         console.log('error in addproject saga:', err)
-        alert('Something went wrong.  Name, date & tag are required. Please Try again.');
+        yield put({ type: 'NOTIFICATION_ERROR' })
     }
     
 }
@@ -83,13 +85,25 @@ const page = (state = 0, action ) => {
             return state;
     }
 }
+//state to know when/what notification to send
+const notification = (state='none', action) => {
+    switch(action.type) {
+        case 'NOTIFICATION_SUCCESS':
+            return 'success';
+        case 'NOTIFICATION_ERROR':
+            return 'error';
+        default:
+            return state;
+    }
+}
 
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         projects,
         tags,
-        page
+        page,
+        notification
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
