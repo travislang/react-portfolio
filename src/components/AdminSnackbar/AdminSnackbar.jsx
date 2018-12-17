@@ -22,8 +22,8 @@ class AdminSnackbar extends Component {
         open: true,
     };
 
-    handleClick = () => {
-        this.setState({ open: true });
+    handleOpen = (variable) => {
+        this.setState({ open: variable });
     };
 
     handleClose = (event, reason) => {

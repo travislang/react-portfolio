@@ -27,10 +27,10 @@ class App extends Component {
         if(notification === 'none') {
         }
         else if (notification === 'success') {
-            snackbar = <AdminSnackbar message='Your project has been added!' />
+            snackbar = <AdminSnackbar variable='true' message='Your project has been added!' />
         }
         else if (notification === 'error') {
-            snackbar = <AdminSnackbar message='Name, date & tag are required. Please Try again.' />
+            snackbar = <AdminSnackbar variable='true' message='Name, date & tag are required. Please Try again.' />
         }
         return (
             <Router>

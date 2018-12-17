@@ -18,6 +18,7 @@ const styles = {
     },
     media: {
         height: 300,
+        boxShadow: 'inset 0 0 0 2000px rgba(0, 0, 0, 0.35)'
     },
 };
 
